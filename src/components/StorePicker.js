@@ -5,7 +5,8 @@ import { getFunName } from '../helpers';
 class StorePicker extends React.Component {
   myInput = React.createRef();
   static PropTypes = {
-    hystory: PropTypes.object
+
+    history: PropTypes.object
   };
 }
 
