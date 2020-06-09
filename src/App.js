@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import PropTypes from 'prop-types';
+import Header from './Header';
+import Order from './Order';
+import Inventory from "./Inventory";
+import sampleFishes from "./sample-fishes";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
-export default App;
+
+
+class App extends React.Component {
+  state = {
+    fishes: {},
+    order: {}
+  };
+
+  static propTypes = {
+    match: PropTypes.object
+  };
+
+
+  componentDidMount() {
+    const { params } = this.props.match;
+    // first reinstate our localStorage
+    const localStorageRef = localStorage.getItem(params.storeId);
+    if (localStorageRef) {
+      this.setState({ order: JSON.parse(localStorageRef) });
+    }
+
+    this.ref = base.syncState(`${params.storeId}/fishes`, {
+      context: this,
+      state: "fishes"
+    });
+  }
+
+
+
+
+
+
+  export default App;
