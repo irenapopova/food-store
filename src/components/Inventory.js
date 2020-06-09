@@ -14,3 +14,16 @@ class Inventory extends React.Component {
     loadSampleFishes: PropTypes.func,
     addFish: PropTypes.func
   };
+
+  state = {
+    uid: null,
+    owner: null
+  };
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.authHandler({ user });
+      }
+    });
+  }
